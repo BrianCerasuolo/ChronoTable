@@ -6,8 +6,8 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Enter Availability <span class="sr-only">(current)</span></a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/availability">Enter Availability <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Suggested Meetings</a>
@@ -24,23 +24,31 @@
         </div> -->
       </li>
     </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngIf="loggedInUser == null">
+        <a class="nav-link" (click)="showLogin()">Sign In  <i class="material-icons sign-up-btn">face</i></a>
+      </li>
+      <li class="nav-item" *ngIf="loggedInUser != null">
+        <a class="nav-link" (click)="logout()">Hello {{loggedInUser.displayName}} <i class="material-icons sign-up-btn">face</i></a>
+      </li>
+    </ul>
     <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
-    <i class="material-icons sign-up-btn" (click)="showLogin()">face</i>
   </div>
 </nav>
 <div role="main" class="container">
-  <div [style.display]="(currentState != 'default') ? 'none' : 'block'">
+  <router-outlet></router-outlet>
+  <!-- <div [style.display]="(currentState != 'default') ? 'none' : 'block'">
     <div class="starter-template">
       <h1>Bootstrap starter template</h1>
       <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
     </div>
-  </div>
-  <div [style.display]="(currentState != 'login') ? 'none' : 'block'">
+  </div> -->
+  <!-- <div [style.display]="(currentState != 'login') ? 'none' : 'block'">
     <div id="firebaseui-auth-container"></div>
-  </div>
+  </div> -->
 
        
   

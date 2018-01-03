@@ -1,0 +1,24 @@
+<p>
+  availability works!
+</p>
+
+<div>
+    <chrono-calendar
+        [showDaysOfSurroundingMonths]="false" 
+        [matIcons]="true" 
+        [disallowBackPastMonths]="true" 
+        [sundayFirstDay]="true" 
+        [disableDaysBefore]="true"
+        [disableDaysAfter]="false" 
+        [monthChanged]="logMonthChanged"
+        [highlightDays]="highlightDays"
+        [dayClick]="oneDaySelectionOnly"
+       
+        [month]="myMonth" 
+        [(ngModel)]="initialCount">
+    </chrono-calendar>
+</div>
+<!-- [weekDaysOff]="[0, 3]" -->
+<div>
+  {{initialCount}}
+</div>
