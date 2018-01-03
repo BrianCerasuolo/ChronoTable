@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './providers/auth.service.ts.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  constructor(private authService: AuthService){
+
+  }
+
+  login(){
+    this.authService.loginWithPopup();
+  }
+  title = 'yoooo';
+  currentState = "default";
+
+  showLogin(){
+    this.currentState = 'login'
+    this.login();
+  }
 }
+
