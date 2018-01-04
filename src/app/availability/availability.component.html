@@ -4,21 +4,16 @@
 
 <div>
     <chrono-calendar
-        [showDaysOfSurroundingMonths]="false" 
-        [matIcons]="true" 
-        [disallowBackPastMonths]="true" 
-        [sundayFirstDay]="true" 
-        [disableDaysBefore]="true"
-        [disableDaysAfter]="false" 
-        [monthChanged]="logMonthChanged"
         [highlightDays]="highlightDays"
         [dayClick]="oneDaySelectionOnly"
-       
-        [month]="myMonth" 
-        [(ngModel)]="initialCount">
+        [(ngModel)]="selectedDays">
     </chrono-calendar>
 </div>
+<!-- disables days of the week by index 0-6 -->
 <!-- [weekDaysOff]="[0, 3]" -->
+<!-- callback for when the month is changed -->
+<!-- [monthChanged]="logMonthChanged" -->
 <div>
-  {{initialCount}}
+  {{selectedDays | json}}
 </div>
+
