@@ -17,3 +17,19 @@
   {{selectedDays | json}}
 </div>
 
+
+<label>
+  Start Time
+</label>
+<ngb-timepicker [(ngModel)]="startTime" [meridian]="true" [seconds]="false"></ngb-timepicker>
+<p>{{startTime | json}}
+    
+    </p>
+    <br>
+
+<label>
+    End Time
+  </label>
+  <ngb-timepicker [(ngModel)]="endTime" [meridian]="true" [seconds]="false"></ngb-timepicker>
+  <p>{{endTime | json}}</p>
+  

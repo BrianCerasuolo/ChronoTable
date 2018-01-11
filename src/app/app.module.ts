@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppComponent } from './app.component';
 
@@ -12,13 +14,14 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
-import { AuthService } from './providers/auth.service.ts.service';
+import { AuthService } from './providers/auth.service';
 import { AvailabilityComponent } from './availability/availability.component';
 
 //import { CalendarModule } from './shared/calendar/calendar.module';
 import { CalendarComponent } from './shared/calendar/calendar.component';
 import { DateRangeHelper } from './shared/calendar/date-range-helper.service';
 import { DateClickedDirective } from './shared/calendar/date-click.directive';
+import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap/timepicker/timepicker.module';
 
 
 
@@ -37,6 +40,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    NgbTimepickerModule.forRoot(),
     MatToolbarModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),

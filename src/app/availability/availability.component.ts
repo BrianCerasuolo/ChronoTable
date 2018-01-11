@@ -15,7 +15,9 @@ export class AvailabilityComponent implements OnInit {
   highlightDays: any[];
   selectedDays: Array<any>; // this is the [(ngModel)] property
   datesArray: Array<any>;
-
+  startTime: any;
+  endTime: any;
+  
   oneDaySelectionOnly(event, day){
     console.log(day);
   }
@@ -32,15 +34,10 @@ export class AvailabilityComponent implements OnInit {
          {date: moment().date(30).date(), css: 'stay-dates', selectable: true, title: 'I\'m thir... i\'m 28, seriously, I mean ...'}
        ];
 
-      // examples to work with
-      console.log('date: moment().date(19) ', moment().date(19).date());
-      console.log('date: moment().date(20) ', moment().date(20).date());
-      console.log('date: moment().date(21) ', moment().date(21).date());
-
       // ***Setting project scope.
       this.selectedDays = [];
 
-      // enter variables for startDates and End dates
+
       let startDate = moment().add(1, 'weeks').startOf('isoWeek').valueOf(); // enter variable or ms value
       let endDate = moment().add(1, 'weeks').endOf('isoWeek').valueOf(); // enter variable or ms value // 1502510400000
 

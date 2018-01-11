@@ -3,6 +3,8 @@ import { AngularFireAuth} from 'angularfire2/auth';
 import { firebase } from '@firebase/app';
 import { Observable } from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { AngularFirestore } from 'angularfire2/firestore';
+import {Moment} from 'moment/moment';
 
 // interface User {
 
@@ -22,7 +24,7 @@ export class AuthService {
   
   public readonly loggedInUser: Observable<User> = this._loggedInUser.asObservable();
 
-  constructor(public af: AngularFireAuth) {
+  constructor(public af: AngularFireAuth, public afs: AngularFirestore) {
     this.af.authState.subscribe((auth) => {
       console.log("this is auth: ", auth);
     })
@@ -34,21 +36,32 @@ export class AuthService {
     provider.addScope('profile');
 
      this.af.auth.signInWithPopup(provider).then((result) => this.assignUser(result));
-    //this.assignUser({uid:"hi", user: {email: "yo", photoURL: "sup", displayName: "name"}});
   }
 
   loginWithEmail(email){
 
   }
+  
   assignUser(userResult){
-    var user = new User();
-    user.uid = userResult.uid;
-    user.email = userResult.user.email;
-    user.photoURL = userResult.user.photoURL;
-    user.displayName = userResult.user.displayName;
 
-    this._loggedInUser.next(Object.assign({}, user));
-  }
+    this.afs.doc(`users/${userResult.user.uid}`).ref.get().then((user) => {
+      if (!user.exists) {
+        this.afs.collection('users').doc(userResult.user.uid)
+          .set({createdAt: new Date().toISOString() })
+            .then(() =>{ 
+                var user = new User();
+                user.uid = userResult.user.uid;
+                user.email = userResult.user.email;
+                user.photoURL = userResult.user.photoURL;
+                user.displayName = userResult.user.displayName;
+
+                this._loggedInUser.next(Object.assign({}, user));
+            });
+        } 
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    })
+  };  
 
   logout() {
     this.af.auth.signOut();
